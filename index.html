@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>แทน888 — แตกง่าย (เกมจำลอง)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;800&display=swap">
+<style>
+:root{color-scheme:dark;--gold:#ffd54a;--gold2:#ff9d00;--ink:#2a1500;--line:rgba(255,215,0,.22);--glass:rgba(255,255,255,.05);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Kanit','Segoe UI',system-ui,sans-serif;color:#fff;min-height:100vh;display:flex;justify-content:center;padding:18px 16px 28px;overflow-x:hidden;background:radial-gradient(ellipse at 50% -10%,#3a1456 0,transparent 60%),radial-gradient(circle at 90% 100%,rgba(230,0,120,.18),transparent 55%),radial-gradient(circle at 5% 80%,rgba(255,150,0,.12),transparent 50%),#08050f}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bg i{position:absolute;bottom:-40px;border-radius:50%;background:radial-gradient(circle,rgba(255,213,74,.9),rgba(255,213,74,0) 70%);opacity:0;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.5}100%{transform:translateY(-110vh) scale(1.2);opacity:0}}
+.screen{display:none;position:relative;z-index:1;flex-direction:column;align-items:center;width:100%;max-width:440px;margin:auto;animation:fadeIn .5s ease}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.gold-text{background:linear-gradient(180deg,#fffbe0 0,#ffd54a 38%,#ff9d00 72%,#a85400 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* landing */
+.crest{font-size:2.6rem;filter:drop-shadow(0 0 18px rgba(255,200,60,.8));animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.logo{font-size:clamp(3.4rem,17vw,5rem);font-weight:800;letter-spacing:1px;line-height:1.15;filter:drop-shadow(0 0 28px rgba(255,170,0,.55))}
+.tag{margin-top:6px;font-size:.8rem;letter-spacing:6px;color:#c9a64a;font-weight:500}
+.divider{width:140px;height:2px;margin:22px 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.headline{font-size:1.15rem;line-height:1.7;text-align:center;color:#f3e9ff}
+.headline b{color:var(--gold)}
+.sub{margin-top:8px;font-size:.95rem;color:#a394b8;text-align:center}
+.cta{position:relative;overflow:hidden;margin-top:38px;padding:18px 78px;border:none;border-radius:999px;font-family:inherit;font-size:1.25rem;font-weight:800;color:var(--ink);cursor:pointer;background:linear-gradient(135deg,#ffe98a,#ffb300 50%,#ff8a00);animation:pulse 2.2s ease-in-out infinite;transition:transform .15s}
+.cta:active{transform:scale(.94)}
+.cta::after,.spin::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-70%}100%{left:130%}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(255,200,60,.25),0 0 24px rgba(255,160,0,.5)}50%{box-shadow:0 0 0 10px rgba(255,200,60,.07),0 0 46px rgba(255,160,0,.9)}}
+
+/* top bar */
+.bar{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{font-weight:800;font-size:1.5rem;filter:drop-shadow(0 0 10px rgba(255,170,0,.4))}
+.right{display:flex;align-items:center;gap:8px}
+.pill{display:flex;align-items:center;gap:8px;padding:7px 16px 7px 8px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12)}
+.coin{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc61a 45%,#c27800);border:2px solid #ffe27a;box-shadow:0 0 10px rgba(255,190,0,.7);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#7a4300}
+.pill b{font-size:1.08rem;color:var(--gold);font-variant-numeric:tabular-nums}
+.snd{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:#fff;font-size:1rem;cursor:pointer}
+
+/* machine */
+.machine{position:relative;margin-top:20px;width:100%;padding:14px;border-radius:26px;background:linear-gradient(145deg,#ffe27a,#c98a0c 40%,#ffd54a 60%,#9a5d00);box-shadow:0 0 50px rgba(255,150,0,.35),0 14px 40px rgba(0,0,0,.6)}
+.lights{display:flex;justify-content:space-between;padding:0 6px;height:10px;margin-bottom:8px}
+.lights.bot{margin:8px 0 0}
+.lights span{width:8px;height:8px;border-radius:50%;background:#fff6c7;box-shadow:0 0 8px #fff,0 0 14px #ffb300;animation:blink 1.2s steps(2) infinite}
+.lights span:nth-child(even){animation-delay:.6s}
+@keyframes blink{50%{opacity:.25;box-shadow:none}}
+.window{position:relative;padding:16px 12px;border-radius:18px;background:radial-gradient(ellipse at 50% 0,#2a1445,#0b0714 70%);box-shadow:inset 0 8px 24px rgba(0,0,0,.95),inset 0 0 0 2px rgba(0,0,0,.6)}
+.reels{display:flex;justify-content:center;gap:10px}
+.reel{flex:1;max-width:116px;aspect-ratio:1/1.12;display:flex;align-items:center;justify-content:center;font-size:clamp(2.3rem,11vw,3.2rem);border-radius:14px;background:linear-gradient(180deg,#fff 0,#f4eefc 12%,#e7dff5 50%,#f4eefc 88%,#fff 100%);box-shadow:inset 0 10px 14px -6px rgba(0,0,0,.55),inset 0 -10px 14px -6px rgba(0,0,0,.55),0 0 0 2px rgba(0,0,0,.5);user-select:none;overflow:hidden}
+.reel span{display:block;line-height:1}
+.reel.rolling span{animation:jit .09s linear infinite}
+@keyframes jit{0%{transform:translateY(-7px)}50%{transform:translateY(7px)}100%{transform:translateY(-7px)}}
+.reel.stop span{animation:thud .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes thud{0%{transform:translateY(-18px) scale(.9)}100%{transform:none}}
+.reel.win{box-shadow:inset 0 0 22px rgba(255,200,60,.9),0 0 0 3px var(--gold),0 0 28px rgba(255,200,60,.9);animation:pop .5s ease}
+@keyframes pop{50%{transform:scale(1.1)}}
+.payline{position:absolute;left:4px;right:4px;top:50%;height:2px;background:linear-gradient(90deg,transparent,#ff4d6d,transparent);opacity:.55;pointer-events:none}
+.winpop{position:absolute;left:0;right:0;top:50%;text-align:center;pointer-events:none;font-size:2.4rem;font-weight:800;opacity:0;transform:translateY(-50%) scale(.6);text-shadow:0 4px 20px rgba(0,0,0,.8)}
+.winpop.show{animation:winpop 1.8s ease forwards}
+@keyframes winpop{0%{opacity:0;transform:translateY(-50%) scale(.5)}15%{opacity:1;transform:translateY(-50%) scale(1.15)}30%{transform:translateY(-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-90%) scale(1)}}
+.machine.shake{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+
+.msg{margin-top:14px;min-height:28px;font-size:1rem;font-weight:600;text-align:center}
+.msg.win{color:#7dffa8;text-shadow:0 0 16px rgba(80,255,140,.6)}
+.msg.lose{color:#ff8b9b}
+
+/* panels */
+.panel{margin-top:6px;width:100%;padding:14px;border-radius:18px;background:var(--glass);border:1px solid var(--line)}
+.ph{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:#b9a9d0;margin-bottom:12px}
+.ph b{color:var(--gold);font-size:1rem;font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:10px}
+.chip{flex:1;aspect-ratio:1.5/1;border-radius:14px;border:2px dashed rgba(255,255,255,.35);background:radial-gradient(circle,#4b1d6e,#2a0f40);color:#fff;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:.18s}
+.chip.active{background:linear-gradient(135deg,#ffe27a,#ff9d00);color:var(--ink);border:2px solid #fff3b0;box-shadow:0 0 22px rgba(255,170,0,.65);transform:translateY(-2px)}
+.chip:disabled,.field input:disabled,.field button:disabled{opacity:.45;cursor:not-allowed}
+.field{display:flex;gap:8px;margin-top:12px}
+.field input{flex:1;min-width:0;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,215,0,.3);background:rgba(0,0,0,.45);color:#fff;font-family:inherit;font-size:.95rem;outline:none;transition:.2s}
+.field input::placeholder{color:#7a6c8f}
+.field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,200,60,.14)}
+.field button{padding:12px 18px;border-radius:12px;border:none;background:linear-gradient(135deg,#ffd54a,#ff9d00);color:var(--ink);font-family:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+.field button:active{transform:scale(.95)}
+.spin{position:relative;overflow:hidden;margin-top:16px;width:100%;padding:18px;border:none;border-radius:16px;font-family:inherit;font-size:1.3rem;font-weight:800;letter-spacing:1px;color:var(--ink);cursor:pointer;background:linear-gradient(135deg,#ffe98a,#ffb300 55%,#ff8a00);box-shadow:0 6px 0 #a85400,0 12px 30px rgba(255,150,0,.45);transition:transform .1s,box-shadow .1s}
+.spin:active{transform:translateY(4px);box-shadow:0 2px 0 #a85400,0 6px 16px rgba(255,150,0,.4)}
+.spin:disabled{opacity:.55;cursor:not-allowed}
+.foot{margin-top:26px;font-size:.78rem;color:#6c5f80;text-align:center;line-height:1.7}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<canvas id="fx"></canvas>
+
+<section class="screen active" id="landing">
+  <div class="crest">👑</div>
+  <div class="logo gold-text">แทน888</div>
+  <div class="tag">SLOT · แตกง่าย</div>
+  <div class="divider"></div>
+  <p class="headline">คุณ พร้อมจะเข้า <b>แทน888</b> แตกง่าย หรือไม่</p>
+  <p class="sub">ถ้าคุณชอบเดิมพัน เราคือทีมเดียวกัน</p>
+  <button class="cta" id="btnConfirm">ยืนยัน</button>
+  <div class="foot">Cr: คิวสุดหล่อ<br>เกมจำลอง ใช้เหรียญปลอม ไม่เกี่ยวกับเงินจริง</div>
+</section>
+
+<section class="screen" id="game">
+  <div class="bar">
+    <div class="brand gold-text">แทน888</div>
+    <div class="right">
+      <div class="pill"><span class="coin">฿</span><b id="balanceText">10,000</b></div>
+      <button class="snd" id="btnSnd" aria-label="เสียง">🔊</button>
+    </div>
+  </div>
+
+  <div class="machine" id="machine">
+    <div class="lights" id="lightsTop"></div>
+    <div class="window">
+      <div class="reels">
+        <div class="reel" id="reel0"><span>🍒</span></div>
+        <div class="reel" id="reel1"><span>🍋</span></div>
+        <div class="reel" id="reel2"><span>🍇</span></div>
+      </div>
+      <div class="payline"></div>
+      <div class="winpop gold-text" id="winpop"></div>
+    </div>
+    <div class="lights bot" id="lightsBot"></div>
+  </div>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="panel">
+    <div class="ph"><span>เดิมพันต่อรอบ</span><b id="betText">100</b></div>
+    <div class="chips" id="betRow">
+      <button class="chip active" data-bet="100">100</button>
+      <button class="chip" data-bet="1000">1,000</button>
+      <button class="chip" data-bet="10000">10,000</button>
+    </div>
+    <div class="field">
+      <input id="customBet" type="number" inputmode="numeric" min="1" placeholder="กำหนดเงินเดิมพันเอง">
+      <button id="btnCustom">ตั้งค่า</button>
+    </div>
+  </div>
+
+  <button class="spin" id="btnSpin">หมุนเลย</button>
+
+  <div class="panel" style="margin-top:16px">
+    <div class="ph"><span>โค้ดรับเหรียญ</span></div>
+    <div class="field" style="margin-top:0">
+      <input id="codeInput" type="text" placeholder="ใส่โค้ด" maxlength="20" autocomplete="off">
+      <button id="btnRedeem">ใช้โค้ด</button>
+    </div>
+  </div>
+
+  <div class="foot">Cr: คิวสุดหล่อ<br>เกมจำลอง ใช้เหรียญปลอม ไม่เกี่ยวกับเงินจริง</div>
+</section>
+
+<script>
+(function(){
+  const FRUITS=['🌰','🍇','🍈','🍉','🍊','🍋','🍌','🍍','🍎','🍐','🍏','🍑','🍒','🍓'];
+  const WIN_RATE=0.80, MULTIPLIER=10, SPIN_TIME=3000;
+  const CODES={'KITHUMLEX':100000,'KIT888':5000,'แทน888':1000000};
+  const K_BAL='kit888_balance', K_CODES='kit888_used_codes';
+
+  function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+  let balance=Number(load(K_BAL,10000)); if(!isFinite(balance)) balance=10000;
+  let usedCodes=load(K_CODES,[]); if(!Array.isArray(usedCodes)) usedCodes=[];
+  let bet=100, spinning=false, shown=balance, soundOn=load('kit888_snd',true)!==false;
+
+  const $=id=>document.getElementById(id);
+  const reels=[$('reel0'),$('reel1'),$('reel2')];
+  const reelSpans=reels.map(r=>r.firstElementChild);
+  const chips=Array.from(document.querySelectorAll('.chip'));
+  const spinBtn=$('btnSpin');
+  const fmt=n=>n.toLocaleString('en-US');
+  const randFruit=()=>FRUITS[Math.floor(Math.random()*FRUITS.length)];
+
+  /* background bokeh + marquee lights */
+  (function(){
+    const bg=$('bg');
+    for(let i=0;i<7;i++){const s=document.createElement('i'),z=8+Math.random()*26;
+      s.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${9+Math.random()*10}s;animation-delay:${-Math.random()*14}s`;bg.appendChild(s)}
+    ['lightsTop','lightsBot'].forEach(id=>{const el=$(id);for(let i=0;i<14;i++)el.appendChild(document.createElement('span'))});
+  })();
+
+  /* sound */
+  let ac;
+  function beep(f,d,type,v){
+    if(!soundOn) return;
+    try{
+      ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.type=type||'sine';o.frequency.value=f;g.gain.value=v||.05;
+      o.connect(g);g.connect(ac.destination);o.start();
+      g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.stop(ac.currentTime+d);
+    }catch(e){}
+  }
+  function jingle(){[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>beep(f,.25,'triangle',.07),i*110))}
+  $('btnSnd').textContent=soundOn?'🔊':'🔇';
+  $('btnSnd').addEventListener('click',()=>{soundOn=!soundOn;save('kit888_snd',soundOn);$('btnSnd').textContent=soundOn?'🔊':'🔇';beep(660,.1)});
+
+  /* confetti */
+  const cv=$('fx'),cx=cv.getContext('2d');let parts=[],raf=0;
+  function sizeCv(){const r=window.devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;cx.setTransform(r,0,0,r,0,0)}
+  sizeCv();addEventListener('resize',sizeCv);
+  function confetti(n){
+    const chars=['🪙','✨','🪙','⭐'];
+    for(let i=0;i<n;i++)parts.push({x:innerWidth/2+(Math.random()-.5)*120,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-8-Math.random()*10,r:14+Math.random()*14,a:Math.random()*6,va:(Math.random()-.5)*.3,c:chars[i%chars.length]});
+    if(!raf) raf=requestAnimationFrame(tick);
+  }
+  function tick(){
+    cx.clearRect(0,0,innerWidth,innerHeight);
+    parts=parts.filter(p=>p.y<innerHeight+40);
+    parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.45;p.vx*=.99;p.a+=p.va;
+      cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.font=p.r+'px serif';cx.textAlign='center';cx.fillText(p.c,0,0);cx.restore()});
+    raf=parts.length?requestAnimationFrame(tick):0;
+    if(!raf) cx.clearRect(0,0,innerWidth,innerHeight);
+  }
+
+  /* balance */
+  function setBalanceText(n){shown=n;$('balanceText').textContent=fmt(n)}
+  function updateBalance(animate){
+    save(K_BAL,balance);
+    if(!animate){setBalanceText(balance);return}
+    const from=shown,to=balance,t0=performance.now(),ms=900;
+    (function f(t){const p=Math.min(1,(t-t0)/ms);setBalanceText(Math.round(from+(to-from)*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)})(t0);
+  }
+  function showMsg(t,type){$('msg').textContent=t;$('msg').className='msg'+(type?' '+type:'')}
+  function setDisabled(d){spinBtn.disabled=d;chips.forEach(b=>b.disabled=d);$('customBet').disabled=d;$('btnCustom').disabled=d}
+  function setBet(v){bet=v;$('betText').textContent=fmt(v)}
+
+  $('btnConfirm').addEventListener('click',()=>{
+    beep(520,.12);
+    $('landing').classList.remove('active');
+    $('game').classList.add('active');
+    updateBalance(false);
+  });
+
+  chips.forEach(btn=>btn.addEventListener('click',()=>{
+    if(spinning) return;
+    setBet(Number(btn.dataset.bet));
+    chips.forEach(b=>b.classList.toggle('active',b===btn));
+    beep(440,.06);showMsg('','');
+  }));
+
+  function setCustomBet(){
+    if(spinning) return;
+    const v=Math.floor(Number($('customBet').value));
+    if(!isFinite(v)||v<1){showMsg('❌ ใส่จำนวนเงินให้ถูกต้อง','lose');return}
+    setBet(v);chips.forEach(b=>b.classList.remove('active'));
+    beep(440,.06);showMsg(`ตั้งเดิมพันรอบละ ${fmt(v)}`,'');
+  }
+  $('btnCustom').addEventListener('click',setCustomBet);
+  $('customBet').addEventListener('keydown',e=>{if(e.key==='Enter')setCustomBet()});
+
+  function makeResult(){
+    if(Math.random()<WIN_RATE){const f=randFruit();return{isWin:true,result:[f,f,f]}}
+    let r;
+    do{r=[randFruit(),randFruit(),randFruit()]}while(r[0]===r[1]&&r[1]===r[2]);
+    return{isWin:false,result:r};
+  }
+
+  async function spin(){
+    if(spinning) return;
+    if(balance<bet){showMsg('ยอดเงินไม่พอ','lose');beep(180,.25,'sawtooth',.04);return}
+    spinning=true;setDisabled(true);showMsg('','');
+    balance-=bet;updateBalance(true);
+    const {isWin,result}=makeResult();
+    await Promise.all(reels.map((reel,i)=>{
+      reel.classList.remove('stop');reel.classList.add('rolling');
+      const iv=setInterval(()=>{reelSpans[i].textContent=randFruit()},80);
+      return new Promise(res=>setTimeout(()=>{
+        clearInterval(iv);reelSpans[i].textContent=result[i];
+        reel.classList.remove('rolling');void reel.offsetWidth;reel.classList.add('stop');
+        beep(220,.15,'triangle',.08);res();
+      },SPIN_TIME-800+i*400));
+    }));
+    if(isWin){
+      const payout=bet*MULTIPLIER;
+      balance+=payout;updateBalance(true);
+      reels.forEach(r=>r.classList.add('win'));
+      const wp=$('winpop');wp.textContent='+'+fmt(payout);wp.classList.remove('show');void wp.offsetWidth;wp.classList.add('show');
+      showMsg('🎉 แตก!','win');
+      confetti(payout>=100000?80:45);jingle();
+      setTimeout(()=>reels.forEach(r=>r.classList.remove('win')),1600);
+    }else{
+      const m=$('machine');m.classList.remove('shake');void m.offsetWidth;m.classList.add('shake');
+      showMsg(`😢 ไม่แตก เสีย ${fmt(bet)}`,'lose');beep(150,.3,'sawtooth',.04);
+    }
+    spinning=false;setDisabled(false);
+  }
+  spinBtn.addEventListener('click',spin);
+
+  function redeem(){
+    const code=$('codeInput').value.trim().toUpperCase();
+    if(!code) return;
+    if(Object.prototype.hasOwnProperty.call(CODES,code)){
+      if(usedCodes.includes(code)){showMsg('❌ คุณใช้โค้ดนี้ไปแล้ว','lose');$('codeInput').value='';return}
+      balance+=CODES[code];updateBalance(true);
+      usedCodes.push(code);save(K_CODES,usedCodes);
+      showMsg(`✅ ใช้โค้ดสำเร็จ +${fmt(CODES[code])}`,'win');
+      confetti(40);jingle();
+    }else{
+      showMsg('❌ โค้ดไม่ถูกต้อง','lose');
+    }
+    $('codeInput').value='';
+  }
+  $('btnRedeem').addEventListener('click',redeem);
+  $('codeInput').addEventListener('keydown',e=>{if(e.key==='Enter')redeem()});
+
+  updateBalance(false);
+})();
+</script>
+</body>
+        </html>
+        
